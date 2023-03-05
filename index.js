@@ -1,7 +1,11 @@
 const express = require ("express");
 const connectToDatabase = require ("./src/database/database");
+const usuario = require ("./src/router/usuario.router");
+
 
 connectToDatabase ();
+
+app.use("/usuario", usuario);
 
 const app = express();
 
