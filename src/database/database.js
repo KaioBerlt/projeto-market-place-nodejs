@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//conexão com o Mongo DB 
 function connectToDatabase () {
     mongoose.connect("mongodb://127.0.0.1:27017/Projeto", {
         useNewUrlParser: true,
