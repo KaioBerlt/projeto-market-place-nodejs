@@ -5,11 +5,13 @@ const usuario = require ("./src/router/usuario.router");//arquivo de rota do usu
 
 connectToDatabase ();//conectando com o banco
 
-app.use("/usuario", usuario);
 
 const app = express();
+app.use("/usuario", usuario);
+
 
 const port = 3000;
+
 app.use(express.json());
 
 app.get("/", (req,res) => {
