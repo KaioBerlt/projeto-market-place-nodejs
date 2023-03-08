@@ -32,7 +32,7 @@ const findAllUsersController = async (req, res) => {
   }
 };
 
-const creatUserController = async (req, res) => {
+const createUserController = async (req, res) => {
     try {
       const body = req.body;
       if(!body.nome){
@@ -126,7 +126,7 @@ const removeUserFavProductController = async (req, res) => {
 module.exports = {
   findUserByIdController,
   findAllUsersController,
-  creatUserController,
+  createUserController,
   updateUserController,
   removeUserController,
   addUserAdressController,
