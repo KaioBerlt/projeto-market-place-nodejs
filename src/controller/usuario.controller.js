@@ -33,14 +33,19 @@ const findAllUsersController = async (req, res) => {
 };
 
 const createUserController = async (req, res) => {
-    try {
+    
+  try {
       const body = req.body;
+
       if(!body.nome){
         return res.status(400).send({ message:"Campo nome precisa ser preenchido"});
       }
 
-      return res.status(201).send(await userService.createUserService(body));
+        return res.status(201).send(await userService.createUserService(body));
 
+      
+
+      
 
     } catch (err) {
       console.log(`erro: ${err.message}`);
@@ -68,10 +73,10 @@ const removeUserController = async (req, res) => {
     try {
       const deletedUser = await userService.removeUserService(req.params.id);
 
-      if(deletedUser.deletedCount > 0){
-        res.status(200).send({ message: `Usuario Deletado Com Sucesso` });
+      if(deletedUser == null){
+        res.status(404).send({ message: `Usuario Não Encontrado` });
       }else{
-        res.status(404).send({ message: `Usuario Não Encontrado, Tente Novamente` });
+        res.status(200).send({ message: `Usuario Deletado Com Sucesso` });
       }
 
 
