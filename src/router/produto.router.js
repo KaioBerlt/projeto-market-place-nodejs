@@ -9,11 +9,12 @@ router.get("/findAll", authMiddleware, produtoCrontroller.findAllProductsControl
 
 // Rotas Post
 router.post("/create", authMiddleware, produtoCrontroller.createProductsController);
-
+router.post("/addCategoria/:id", authMiddleware, produtoCrontroller.addCategoriaProductsController);
 //Rotas Put
 router.put("/update/:id", authMiddleware, produtoCrontroller.updateProductsController);
 
 // Rota Delete
 router.delete("/delete/:id", authMiddleware, produtoCrontroller.deleteProductsController); 
+router.delete("/removeCategoria/:id", authMiddleware, produtoCrontroller.removeCategoriaProductsController);
 
 module.exports = router;
