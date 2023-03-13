@@ -128,7 +128,7 @@ const removeUserAdressController = async (req, res) => {
 
 const addUserFavProductController = async (req, res) => {
     try {
-
+          res.status(201).send(await userService.addUserFavProductService(req.params.id, req.body));
 
     } catch (err) {
       console.log(`erro: ${err.message}`);
@@ -138,7 +138,7 @@ const addUserFavProductController = async (req, res) => {
 
 const removeUserFavProductController = async (req, res) => {
     try {
-
+      res.status(200).send(await userService.removeUserFavProductService(req.params.id, req.body));          
 
     } catch (err) {
       console.log(`erro: ${err.message}`);
