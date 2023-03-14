@@ -6,6 +6,7 @@ const auth = require ("./src/router/auth.router");//arquivo de rota de login
 const produto = require ("./src/router/produto.router");//arquivo de rota de produtos
 const categoria = require("./src/router/categoria.router");//arquivo de rota de categoria
 const carrinho = require("./src/router/carrinho.router");//arquivo de rotas carrinho
+const pedido = require ("./src/router/pedido.router");//arquivo de rotas pedido
 
 const app = express();
 connectToDatabase ();//conectando com o banco
@@ -19,12 +20,14 @@ app.get("/", (req,res) => {
     res.send({
         message: "Bem vindo"
     });
-})
-app.use("/usuario", usuario);//chamando rotas de usuario
-app.use("/auth", auth);//chamando rotas de auth
-app.use("/produto", produto);//chamando rotas de produto
-app.use("/categoria", categoria);//chamando rotas de categoria
-app.use("/carrinho", carrinho)//chamando rotas de carrinho
+});
+
+app.use("/usuario", usuario); //chamando rotas de usuario
+app.use("/auth", auth); //chamando rotas de auth
+app.use("/produto", produto); //chamando rotas de produto
+app.use("/categoria", categoria); //chamando rotas de categoria
+app.use("/carrinho", carrinho); //chamando rotas de carrinho
+app.use("/pedido", pedido); //chamando rotas de pedido
 
 
 app.listen(port, () =>{
