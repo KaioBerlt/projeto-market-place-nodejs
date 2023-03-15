@@ -2,7 +2,7 @@ const produtoService = require ("../service/produto.service");
 
 const findProductsByIdController = async (req, res) => {
     try{
-        res.send(await produtoService.findProductsByIdService(req.params.id));
+        res.status(200).send(await produtoService.findProductsByIdService(req.params.id));
     } catch (err) {
         console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: `Erro Inesperado, Tente Novamente` });
@@ -11,7 +11,7 @@ const findProductsByIdController = async (req, res) => {
 
 const findAllProductsController = async (req, res) => {
     try{
-        res.send(await produtoService.findAllProductsService());
+        res.status(200).send(await produtoService.findAllProductsService());
     } catch (err) {
         console.log(`erro: ${err.message}`);
         return res.status(500).send({ message: `Erro Inesperado, Tente Novamente` });
@@ -25,7 +25,7 @@ const createProductsController = async (req, res) => {
             userId: req.userId
         }
 
-        res.send(await produtoService.createProductsService(corpo));
+        res.status(201).send(await produtoService.createProductsService(corpo));
 
     } catch (err) {
         console.log(`erro: ${err.message}`);
@@ -35,7 +35,7 @@ const createProductsController = async (req, res) => {
 
 const updateProductsController = async (req, res) => {
     try{
-        res.send(await produtoService.updateProductsService(req.params.id, req.body));
+        res.status(200).send(await produtoService.updateProductsService(req.params.id, req.body));
 
     }catch (err) {
     console.log(`erro: ${err.message}`);
@@ -45,7 +45,7 @@ const updateProductsController = async (req, res) => {
 
 const deleteProductsController = async (req, res) => {
     try{
-        res.send(await produtoService.deleteProductsService(req.params.id));
+        res.status(200).send(await produtoService.deleteProductsService(req.params.id));
         
     }catch (err) {
     console.log(`erro: ${err.message}`);
