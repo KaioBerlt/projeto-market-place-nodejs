@@ -1,3 +1,5 @@
+const ObjectId = require("mongoose").Types.ObjectId;
+
 //teste um erro por vez
 const validaUsuario = (req, res, next) => {
     if(!req.body.nome){
@@ -114,13 +116,21 @@ const validaCarrinho = (req, res, next) => {
         return next();
     }else{
         if(erros.length > 1){
-            return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos`})     
+            return res.status(400).send({ message: `Os campos ${erros} precisam ser preenchidos`});     
         }else{
-            return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido`})
+            return res.status(400).send({ message: `O campo ${erros} precisa ser preenchido`});
         }
        
     }
+};
 
+const validaId = (req, res, next) => {
+    if(ObjectId.isValid(req.params.id)){
+        return next();
+    }else{
+        return res.status(400).send({ message: `O ID nao corresponde aos padroes`});
+
+    }
 };
 
 module.exports = {
@@ -129,4 +139,5 @@ module.exports = {
     validaCategoria,
     validaPedido,
     validaCarrinho,
+    validaId, 
 };
