@@ -3,10 +3,11 @@ const router = require("express").Router();
 const pedidoCrontroller = require("../controller/pedido.controller");
 const authMiddleware = require("../middleware/auth.middleware");
 const { validaPedido, validaId } = require("../middleware/validacao.middleware");
+const paginacao = require("../middleware/paginacao.middleware");
 
 // Rotas Get
 router.get("/find/:id", authMiddleware, validaId, pedidoCrontroller.findPedidoByIdController);
-router.get("/findAll", authMiddleware, pedidoCrontroller.findAllPedidoController);
+router.get("/findAll", authMiddleware, paginacao, pedidoCrontroller.findAllPedidoController);
 
 // Rotas Post
 router.post("/create", authMiddleware, validaPedido, pedidoCrontroller.createPedidoController);
