@@ -32,6 +32,7 @@ const addUserAdressService = (id, endereco) => {
     },
     {
         rawResult: true,
+        returnDocument:"after",
     }
   );
 };

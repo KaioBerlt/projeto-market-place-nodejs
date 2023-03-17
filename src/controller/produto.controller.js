@@ -55,8 +55,7 @@ const deleteProductsController = async (req, res) => {
 
 const addCategoriaProductsController = async (req, res) => {
     try{
-        const categoria = await produtoService.addCategoriaProductsService(req.params.id, req.body);
-        res.status(200).send(categoria);
+        res.status(200).send(await produtoService.addCategoriaProductsService(req.params.id, req.body));
 
     }catch (err) {
     console.log(`erro: ${err.message}`);
@@ -66,8 +65,7 @@ const addCategoriaProductsController = async (req, res) => {
 
 const removeCategoriaProductsController = async (req, res) => {
     try{
-        const categoria = await produtoService.removeCategoriaProductsService(req.params.id, req.body);
-        res.status(200).send(categoria);
+        res.status(200).send(await produtoService.removeCategoriaProductsService(req.params.id, req.body));
         
     }catch (err) {
     console.log(`erro: ${err.message}`);
