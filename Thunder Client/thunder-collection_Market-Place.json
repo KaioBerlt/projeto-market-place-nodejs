@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Market-Place",
-    "dateExported": "2023-03-14T10:16:50.116Z",
+    "dateExported": "2023-03-17T10:58:27.668Z",
     "version": "1.1",
     "folders": [
         {
@@ -57,9 +57,13 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-03-07T09:30:28.029Z",
-            "modified": "2023-03-10T10:45:14.560Z",
+            "modified": "2023-03-15T10:40:20.310Z",
             "headers": [],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
             "tests": []
         },
         {
@@ -71,7 +75,7 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-03-07T09:36:07.949Z",
-            "modified": "2023-03-10T10:46:54.756Z",
+            "modified": "2023-03-16T09:04:39.429Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -89,12 +93,12 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2023-03-07T09:46:00.462Z",
-            "modified": "2023-03-10T08:56:49.095Z",
+            "modified": "2023-03-14T10:50:03.035Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nome\": \"Usuario3\" ,\n  \"email\": \"usuario3@email\" ,\n  \"senha\": \"usersenha\" ,\n  \"imagem\": \"img.usuario.com.br/user3.jpg\"\n}",
+                "raw": "{\n  \"nome\": \"Usuario4\" ,\n  \"email\": \"\" ,\n  \"senha\": \"usersenha\" ,\n  \"imagem\": \"img.usuario.com.br/user4.jpg\"\n}",
                 "form": []
             },
             "tests": []
@@ -118,17 +122,21 @@
             "colId": "0b38b72e-7de9-46cf-a256-c4f3a425fd56",
             "containerId": "0697f2c1-c1bd-4a88-9e55-74aaa71b54e0",
             "name": "addAddress",
-            "url": "http://localhost:3000/usuario/addAddress/6409a81c628b0ffd0a41a51e",
+            "url": "http://localhost:3000/usuario/addAddress/640af0d03b62b9ddb6c1bcb7",
             "method": "POST",
             "sortNum": 70000,
             "created": "2023-03-09T09:17:14.388Z",
-            "modified": "2023-03-09T09:47:56.542Z",
+            "modified": "2023-03-17T09:30:36.987Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"rua\": \"Rua 2\" ,\n  \"numero\": \"103\" ,\n  \"CEP\": \"12.345-100\"\n}",
+                "raw": "[\n{\n  \"rua\": \"Rua 3\" ,\n  \"numero\": \"103\" \n},\n{\n  \"rua\": \"Rua 33\" ,\n  \"numero\": \"1033\" ,\n  \"CEP\": \"12.345-100\"\n}\n\n]",
                 "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
             },
             "tests": []
         },
@@ -179,7 +187,7 @@
             "method": "POST",
             "sortNum": 100000,
             "created": "2023-03-10T09:49:30.240Z",
-            "modified": "2023-03-11T10:17:54.107Z",
+            "modified": "2023-03-17T09:20:49.299Z",
             "headers": [],
             "params": [],
             "body": {
@@ -216,12 +224,12 @@
             "method": "POST",
             "sortNum": 120000,
             "created": "2023-03-11T10:33:39.309Z",
-            "modified": "2023-03-13T09:10:13.151Z",
+            "modified": "2023-03-15T09:01:23.161Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"nome\": \"Pizza Pepperoni\",\n  \"descricao\": \"Molho de tomate, mussarela, Pepperoni\",\n  \"precoUnitario\": 49,\n  \"imagem\": \"img.exemplo\",\n  \"codigoBarra\": 2\n}",
+                "raw": "{\n  \"nome\": \"Pizza Calabresa\",\n  \"descricao\": \"Molho de tomate, mussarela, calabresa fatiada, cebola\",\n  \"precoUnitario\": 49,\n  \"imagem\": \"img.exemplo\",\n  \"codigoBarra\": 3\n}",
                 "form": []
             },
             "auth": {
@@ -424,16 +432,16 @@
             "colId": "0b38b72e-7de9-46cf-a256-c4f3a425fd56",
             "containerId": "8c3b1171-883d-4136-856b-002e153ee62b",
             "name": "Add Categoria",
-            "url": "{{BaseURL}}{{Port}}/produto/addCategoria/640ee8759e2da792fb2bb439",
+            "url": "{{BaseURL}}{{Port}}/produto/addCategoria/64118963e1b28fab88faee6c",
             "method": "POST",
             "sortNum": 220000,
             "created": "2023-03-12T17:46:11.992Z",
-            "modified": "2023-03-13T09:12:48.309Z",
+            "modified": "2023-03-17T10:16:26.574Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"_id\": \"640dccdba5786453f7ce438d\"\n}",
+                "raw": "{\n  \"_id\": \"64118963e1b28fab88faee6c\"\n}",
                 "form": []
             },
             "auth": {
@@ -492,12 +500,12 @@
             "method": "POST",
             "sortNum": 260000,
             "created": "2023-03-13T09:01:43.484Z",
-            "modified": "2023-03-13T09:28:52.166Z",
+            "modified": "2023-03-15T09:28:22.483Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"produtos\": [\n      {\"_id\": \"640ee8759e2da792fb2bb439\", \"quantidade\": 1},\n      {\"_id\": \"640ee8549e2da792fb2bb435\", \"quantidade\": 2}\n    ],\n    \"precoTotal\": 103 ,\n    \"taxaEntrega\": 5\n}",
+                "raw": "{\n  \"produtos\": [\n      {\"_id\": \"640ee8759e2da792fb2bb439\", \"quantidade\": 1},\n      {\"_id\": \"640ee8549e2da792fb2bb435\", \"quantidade\": 2}\n    ],\n    \"precoTotal\": 103 \n\n\n}",
                 "form": []
             },
             "auth": {
@@ -552,16 +560,16 @@
             "colId": "0b38b72e-7de9-46cf-a256-c4f3a425fd56",
             "containerId": "0697f2c1-c1bd-4a88-9e55-74aaa71b54e0",
             "name": "AddFav",
-            "url": "{{BaseURL}}{{Port}}/usuario/addFavProduct/6409a766628b0ffd0a41a510",
+            "url": "{{BaseURL}}{{Port}}/usuario/addFavProduct/640af0d03b62b9ddb6c1bcb7",
             "method": "POST",
             "sortNum": 300000,
             "created": "2023-03-13T10:16:26.851Z",
-            "modified": "2023-03-13T10:21:27.541Z",
+            "modified": "2023-03-17T09:44:44.663Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"_id\": \"640ee8759e2da792fb2bb439\"\n}",
+                "raw": "{\n  \"_id\": \"640ee8549e2da792fb2bb435\"\n}",
                 "form": []
             },
             "auth": {
@@ -638,12 +646,12 @@
             "method": "POST",
             "sortNum": 350000,
             "created": "2023-03-14T09:37:57.863Z",
-            "modified": "2023-03-14T09:41:55.765Z",
+            "modified": "2023-03-17T10:46:30.236Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": " {\n  \"produtos\": [\n      {\"_id\": \"640ee8759e2da792fb2bb439\", \"quantidade\": 1},\n      {\"_id\": \"640ee8549e2da792fb2bb435\", \"quantidade\": 2}\n    ],\n    \"precoTotal\": 103 ,\n    \"taxaEntrega\": 5,\n    \"concluido\": false\n    }",
+                "raw": " {\n  \"produtos\": [\n      {\"_id\": \"640ee8759e2da792fb2bb439\" },\n      {\"_id\": \"640ee8549e2da792fb2bb435\", \"quantidade\": 3}\n    ],\n    \"precoTotal\": 200,\n    \"taxaEntrega\": 5,\n    \"concluido\": false\n    }",
                 "form": []
             },
             "auth": {
