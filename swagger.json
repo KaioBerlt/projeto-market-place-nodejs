@@ -1,0 +1,46 @@
+{
+    "openapi":"3.0.0",
+    "info": {
+        "title": "API Pizzaria",
+        "description": "API de uma Pizzaria para atividade do modulo de Back End na formação Full Stack da Italents",
+        "contact": "Kaio Henrique",
+        "email": "kaioberlt@hotmail.com"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/",
+            "description": "API de Teste Local"
+        }
+    ],
+    "paths": {
+        "/usuario/findAll":{
+            "get":{
+                "summary": "Lista todos os usuarios da API",
+                "description": "Rota responsavel por listar os usuarios cadastrados da API",
+                "tags": ["Usuario"],
+                "responses": {
+                    "200":{
+                        "description": "Ok, Tarefa relizada com sucesso"
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token"
+                    },
+                    "404":{
+                        "description": "Not found, nenhum usuario encontrado"
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor"
+                    }
+                }
+            }
+        },
+
+        "/usuario/find":{
+            "get":{
+                "summary": "Lista Usuario da API pelo ID",
+                "description": "Rota responsavel por localizar um usuario pela ID informada",
+                "tags": ["Usuario"]
+            }
+    }
+}
+}
