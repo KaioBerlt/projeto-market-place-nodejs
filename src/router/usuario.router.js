@@ -11,7 +11,7 @@ router.get("/findById/:id", authMiddleware, validaIdParams, usuarioController.fi
 router.get("/findAll", authMiddleware, paginacao, usuarioController.findAllUsersController);
 
 //rotas POST
-router.post("/create", authMiddleware, validaUsuario, usuarioController.createUserController);
+router.post("/create", validaUsuario, usuarioController.createUserController);
 router.post("/addAddress/:id", authMiddleware, validaIdParams, validaEndereco, usuarioController.addUserAdressController);
 router.post("/addFavProduct/:id", authMiddleware, validaIdParams, valida_IdBody, usuarioController.addUserFavProductController);
 
@@ -20,7 +20,7 @@ router.put("/update/:id", authMiddleware, validaIdParams, validaUsuario, usuario
 
 //rotas DELETE
 router.delete("/remove/:id", authMiddleware, validaIdParams, usuarioController.removeUserController);
-router.delete("/removeAddress/:id", authMiddleware, validaIdParams, usuarioController.removeUserAdressController);
+router.delete("/removeAddress/", authMiddleware, usuarioController.removeUserAdressController);
 router.delete("/removeFavProduct/:id", authMiddleware, validaIdParams, usuarioController.removeUserFavProductController);
 
 module.exports = router;

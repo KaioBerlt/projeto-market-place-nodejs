@@ -109,7 +109,7 @@
             }
         },
 
-        "/usuario/find/{id}":{
+        "/usuario/findById/{id}":{
             "get":{
                 "security": [
                     {
@@ -121,10 +121,10 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "name": "id"
                     }
@@ -196,16 +196,17 @@
                 "summary": "Cria usuarios dentro da API",
                 "description": "Rota responsavel por criar usuarios dentro da API atraves das informaçoes passadas no endpoint",
                 "tags": ["Usuario"],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "required":true,
-                        "schema":{
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
-                    }
-                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    },
+                    "required":true
+                },
                 "responses": {
                     "201":{
                         "description": "Retorna o objeto criado no banco",
@@ -249,22 +250,25 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required":true,
-                        "schema":{
-                            "$ref": "#/components/schemas/Usuario"
-                        },
-                        "name": "body"
                     }
                 ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/Usuario"
+                            }
+                        }
+                    },
+                    "required":true
+                },
                 "responses": {
                     "200":{
                         "description": "Retorna o objeto atualizado no banco",
@@ -326,7 +330,7 @@
             }
         },
 
-        "/usuario/delete/{id}": {
+        "/usuario/remove/{id}": {
             "delete":{
                 "security": [
                     {
@@ -338,10 +342,10 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "name": "id"
                     }
@@ -407,7 +411,7 @@
             }
         },
 
-        "/usuario/addAddres/{id}":{
+        "/usuario/addAddress/{id}":{
             "post": {
                 "security": [
                     {
@@ -419,22 +423,25 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required":true,
-                        "schema":{
-                            "$ref": "#/components/schemas/UserAddress"
-                        },
-                        "name": "body"
                     }
                 ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/UserAddress"
+                            }
+                        }
+                    },
+                    "required":true
+                },
                 "responses": {
                     "201":{
                         "description": "Retorna um usuario com seu novo endereco",
@@ -496,7 +503,7 @@
             }
         },
 
-        "/usuario/removeAddres/{id}":{
+        "/usuario/removeAddress/":{
             "delete":{
                 "security": [
                     {
@@ -506,16 +513,24 @@
                 "summary": "Remove o endereco do usuario dentro da API",
                 "description": "Rota responsavel por remover endereco do usuario dentro da API",
                 "tags": ["Usuario"],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        },
-                        "name": "id"
-                    }
-                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "id": {
+                                        "type":"string"
+                                    },
+                                    "addressId": {
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required":true
+                },
                 "responses": {
                     "200":{
                         "description": "Remove o endereco do usuario",
@@ -523,7 +538,7 @@
                             "application/json": {
                                 "schema": {
                                         "type": "object",
-                                        "$ref": "#/components/schemas/Usuario"   
+                                        "$ref": "#/components/schemas/UserAddress"   
                                 }
                             }
                         }
@@ -589,22 +604,25 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "name": "id"
-                    },
-                    {
-                        "in": "body",
-                        "required":true,
-                        "schema":{
-                            "$ref": "#/components/schemas/ProductFav"
-                        },
-                        "name": "body"
                     }
                 ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/ProductFav"
+                            }
+                        }
+                    },
+                    "required":true
+                },
                 "responses": {
                     "201":{
                         "description": "Retorna um usuario com seu novo produto favorito",
@@ -666,7 +684,7 @@
             }
         },
 
-        "/usuario/removeFav/{id}":{
+        "/usuario/removeFavProduct/{id}":{
             "delete":{
                 "security": [
                     {
@@ -678,14 +696,29 @@
                 "tags": ["Usuario"],
                 "parameters": [
                     {
-                        "in": "query",
+                        "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         },
                         "name": "id"
                     }
                 ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "_id": {
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required":true
+                },
                 "responses": {
                     "200":{
                         "description": "Remove produto favorito do usuario",
@@ -693,7 +726,7 @@
                             "application/json": {
                                 "schema": {
                                         "type": "object",
-                                        "$ref": "#/components/schemas/Usuario"   
+                                        "$ref": "#/components/schemas/ProductFav"   
                                 }
                             }
                         }
