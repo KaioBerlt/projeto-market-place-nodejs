@@ -22,6 +22,10 @@ const findAllCategoriaController = async (req, res) => {
 
 const createCategoriaController = async (req, res) => {
     try{
+      const corpo = {
+        ...req.body,
+        userId: req.userId
+    }
 
         res.status(201).send(await categoriaService.createCategoriaService(corpo));
           

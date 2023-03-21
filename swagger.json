@@ -1371,19 +1371,486 @@
 
 
 
-        "/pedido/find/{id}": {},
+        "/pedido/find/{id}": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista Produto da API pelo ID",
+                "description": "Rota responsavel por localizar um pedido pela ID informada",
+                "tags": ["Pedido"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna um pedido que foi encontrad pelo seu ID",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Pedido"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum pedido encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
-        "/pedido/findAll/": {},
+        "/pedido/findAll/": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
 
-        "/pedido/create/": {},
 
-        "/pedido/updateStatus/{id}": {},
+                "summary": "Lista todos os pedidos na API",
+                "description": "Rota responsavel por listar todos os pedidos feitos na API",
+                "tags": ["Pedido"],
+                "parameters":[
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "limit"
+                    },{
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "offset"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Ok, Tarefa relizada com sucesso",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Pedido"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum pedido encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
-        "/pedido/delete/{id}": {},
+        "/pedido/create/": {
+            "post":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+            
+            "summary": "Cria pedidos dentro da API",
+            "description": "Rota responsavel por criar pedidos dentro da API atraves das informaçoes passadas no endpoint",
+            "tags": ["Pedido"],
+            "requestBody": {
+                "content":{
+                    "application/json":{
+                        "schema": {
+                            "type":"object",
+                            "$ref": "#/components/schemas/Pedido"
+                        }
+                    }
+                },
+                "required":true
+            },
+            "responses": {
+                "201":{
+                    "description": "Retorna o objeto criado no banco",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Pedido"   
+                            }
+                        }
+                    }
+                },
+                "500":{
+                    "description": "Internal server error, alguma coisa deu errado no servidor",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties":{
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        },
+
+        "/pedido/updateStatus/{id}": {
+            "patch":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Atualiza status de pedido dentro da API",
+                "description": "Rota responsavel por atualizar o status do pedido dentro da API",
+                "tags": ["Pedido"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"string",
+                                "$ref": "#/components/schemas/Pedido"
+                            }
+                        }
+                    },
+                    "required":false
+                },
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto atualizado no banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Pedido"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum pedido encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/pedido/delete/{id}": {
+            "delete":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Deleta produtos dentro da API",
+                "description": "Rota responsavel por excluir produtos dentro da API",
+                "tags": ["Pedido"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto deletado do banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Pedido"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum pedido encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
 
 
-        "/categoria/find/{id}": {},
+        "/categoria/find/{id}": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista Produto da API pelo ID",
+                "description": "Rota responsavel por localizar uma categoria pela ID informada",
+                "tags": ["Categoria"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna uma categoria que foi encontrad pelo seu ID",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Categoria"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhuma categoria encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
         "/categoria/findAll/": {
             "get":{
@@ -1476,23 +1943,631 @@
             }
         },
 
-        "/categoria/create/": {},
+        "/categoria/create/": {
+            "post":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+            
+            "summary": "Cria pedidos dentro da API",
+            "description": "Rota responsavel por criar categorias dentro da API atraves das informaçoes passadas no endpoint",
+            "tags": ["Categoria"],
+            "requestBody": {
+                "content":{
+                    "application/json":{
+                        "schema": {
+                            "type":"object",
+                            "$ref": "#/components/schemas/Categoria"
+                        }
+                    }
+                },
+                "required":true
+            },
+            "responses": {
+                "201":{
+                    "description": "Retorna o objeto criado no banco",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Categoria"   
+                            }
+                        }
+                    }
+                },
+                "500":{
+                    "description": "Internal server error, alguma coisa deu errado no servidor",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties":{
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        },
 
-        "/categoria/update/{id}": {},
+        "/categoria/update/{id}": {
+            "put":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Atualiza uma categoria dentro da API",
+                "description": "Rota responsavel por atualizar categorias dentro da API",
+                "tags": ["Categoria"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"string",
+                                "$ref": "#/components/schemas/Categoria"
+                            }
+                        }
+                    },
+                    "required":true
+                },
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto atualizado no banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Categoria"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhuma categoria encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
-        "/categoria/delete/{id}": {},
+        "/categoria/delete/{id}": {
+            "delete":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Deleta categoria dentro da API",
+                "description": "Rota responsavel por excluir categorias de dentro da API",
+                "tags": ["Categoria"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto deletado do banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Categoria"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhuma categoria encontrada",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
 
 
-        "/carrinho/find/{id}": {},
+        "/carrinho/find/{id}": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista Produto da API pelo ID",
+                "description": "Rota responsavel por localizar um carrinho pela ID informada",
+                "tags": ["Carrinho"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna um carrinho que foi encontrado pelo seu ID",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Carrinho"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, carrinho não encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
-        "/carrinho/findAll/": {},
+        "/carrinho/findAll/": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
 
-        "/carrinho/create/": {},
 
-        "/carrinho/update/{id}": {},
+                "summary": "Lista todos os carrinhos na API",
+                "description": "Rota responsavel por listar todos os carrinhos feitos na API",
+                "tags": ["Carrinho"],
+                "parameters":[
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "limit"
+                    },{
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "offset"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Ok, Tarefa relizada com sucesso",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Carrinho"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum carrinho encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
 
-        "/carrinho/delete/{id}": {}
+        "/carrinho/create/": {
+            "post":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+            
+            "summary": "Cria carrinho dentro da API",
+            "description": "Rota responsavel por criar carrinho dentro da API atraves das informaçoes passadas no endpoint",
+            "tags": ["Carrinho"],
+            "requestBody": {
+                "content":{
+                    "application/json":{
+                        "schema": {
+                            "type":"object",
+                            "$ref": "#/components/schemas/Carrinho"
+                        }
+                    }
+                },
+                "required":true
+            },
+            "responses": {
+                "201":{
+                    "description": "Retorna o objeto criado no banco",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Carrinho"   
+                            }
+                        }
+                    }
+                },
+                "500":{
+                    "description": "Internal server error, alguma coisa deu errado no servidor",
+                    "content":{
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties":{
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        },
+
+        "/carrinho/update/{id}": {
+            "put":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Atualiza um carrinho dentro da API",
+                "description": "Rota responsavel por atualizar carrinhos dentro da API",
+                "tags": ["Carrinho"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"string",
+                                "$ref": "#/components/schemas/Carrinho"
+                            }
+                        }
+                    },
+                    "required":true
+                },
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto atualizado no banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Carrinho"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum carrinho encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/carrinho/delete/{id}": {
+            "delete":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Deleta carrinho dentro da API",
+                "description": "Rota responsavel por excluir carrinhos de dentro da API",
+                "tags": ["Carrinho"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto deletado do banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Carrinho"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum carrinho encontrada",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
 
@@ -1638,6 +2713,9 @@
                 "type": "array",
                 "items": {
                     "properties": {
+                        "nome": {
+                            "type": "string"
+                        },
                         "_id": {
                             "type": "string"
                         },
@@ -1646,8 +2724,73 @@
                         }
                     }
                 }
+            },
+            "Pedido":{
+                "type": "object",
+                "properties": {
+                "produtos": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                            },
+                            "quantidade": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "precoTotal": {
+                        "type": "number"
+                    },
+                    "taxaEntrega": {
+                        "type": "number"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "concluido": {
+                        "type": "boolean"
+                        }
+                }
+            },
+            "Carrinho": {
+                "type": "object",
+                "properties": {
+                "produtos": {
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "_id": {
+                                "type": "string"
+                            },
+                            "quantidade": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                },
+                
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "precoTotal": {
+                        "type": "number"
+                    },
+                    "taxaEntrega": {
+                        "type": "number"
+                    },
+                    "userId": {
+                        "type": "string"
+                    }
+                }
             }
-        }
+        }  
     }
 }
 
