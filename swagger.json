@@ -778,7 +778,723 @@
                     }
                 }
             }
-        }
+        },
+
+
+
+        "/produto/find/{id}": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Lista Produto da API pelo ID",
+                "description": "Rota responsavel por localizar um produto pela ID informada",
+                "tags": ["Produto"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna um produto que foi encontrad pelo seu ID",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Produto"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum produto encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        
+
+        "/produto/findAll/": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+
+
+                "summary": "Lista todos os produtos da API",
+                "description": "Rota responsavel por listar todos os produtos cadastrados da API",
+                "tags": ["Produto"],
+                "parameters":[
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "limit"
+                    },{
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "offset"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Ok, Tarefa relizada com sucesso",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Produto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum produto encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/produto/create/": {
+            "post":{
+                    "security": [
+                        {
+                            "bearerAuth": []
+                        }
+                    ],
+                
+                "summary": "Cria produtos dentro da API",
+                "description": "Rota responsavel por criar produtos dentro da API atraves das informaçoes passadas no endpoint",
+                "tags": ["Produto"],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    },
+                    "required":true
+                },
+                "responses": {
+                    "201":{
+                        "description": "Retorna o objeto criado no banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Produto"   
+                                }
+                            }
+                        }
+                    },
+                    "500":{
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/produto/addCategoria/{id}": {
+            "post":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Adiciona produtos favoritos do usuario dentro da API",
+                "description": "Rota responsavel por adicionar produtos favoritos do usuario dentro da API",
+                "tags": ["Produto"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/Categoria"
+                            }
+                        }
+                    },
+                    "required":true
+                },
+                "responses": {
+                    "201":{
+                        "description": "Retorna um usuario com seu novo produto favorito",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Produto"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum usuario encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/produto/update/{id}": {
+            "put":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Atualiza produtos dentro da API",
+                "description": "Rota responsavel por atualizar produtos dentro da API",
+                "tags": ["Produto"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    },
+                    "required":true
+                },
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto atualizado no banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Produto"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum produto encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/produto/delete/{id}": {
+            "delete":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Deleta produtos dentro da API",
+                "description": "Rota responsavel por excluir produtos dentro da API",
+                "tags": ["Produto"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Retorna o objeto deletado do banco",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Produto"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum produto encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/produto/removeCategoria/{id}": {
+            "delete":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "summary": "Remove produto favorito do usuario dentro da API",
+                "description": "Rota responsavel por remover produto favorito do usuario dentro da API",
+                "tags": ["Produto"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "_id": {
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required":true
+                },
+                "responses": {
+                    "200":{
+                        "description": "Remove categoria de produto",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Categoria"   
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhum produto encontrado",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+
+        "/pedido/find/{id}": {},
+
+        "/pedido/findAll/": {},
+
+        "/pedido/create/": {},
+
+        "/pedido/updateStatus/{id}": {},
+
+        "/pedido/delete/{id}": {},
+
+
+
+        "/categoria/find/{id}": {},
+
+        "/categoria/findAll/": {
+            "get":{
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+
+
+                "summary": "Lista todos os produtos da API",
+                "description": "Rota responsavel por listar todas as categorias cadastrados da API",
+                "tags": ["Categoria"],
+                "parameters":[
+                    {
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "limit"
+                    },{
+                        "in": "query",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "name": "offset"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Ok, Tarefa relizada com sucesso",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Categoria"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized, erro de autenticação, problemas com o Token",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description": "Not found, nenhuma categoria encontrada",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error, alguma coisa deu errado no servidor",
+                        "content":{
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties":{
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/categoria/create/": {},
+
+        "/categoria/update/{id}": {},
+
+        "/categoria/delete/{id}": {},
+
+
+
+        "/carrinho/find/{id}": {},
+
+        "/carrinho/findAll/": {},
+
+        "/carrinho/create/": {},
+
+        "/carrinho/update/{id}": {},
+
+        "/carrinho/delete/{id}": {}
+
+
 
 
     },
@@ -873,6 +1589,52 @@
                 }
             },
             "ProductFav": {
+                "type": "array",
+                "items": {
+                    "properties": {
+                        "_id": {
+                            "type": "string"
+                        },
+                        "createdAt": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Produto": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "precoUnitario": {
+                        "type": "number"
+                    },
+                    "imagem": {
+                        "type": "string"
+                    },
+                    "codigoBarra": {
+                        "type": "number"
+                    },
+                    "categorias": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "_id": {
+                                    "type": "string"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }    
+                }
+            },
+            "Categoria": {
                 "type": "array",
                 "items": {
                     "properties": {
