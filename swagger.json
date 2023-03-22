@@ -1616,17 +1616,7 @@
                         "name": "id"
                     }
                 ],
-                "requestBody": {
-                    "content":{
-                        "application/json":{
-                            "schema": {
-                                "type":"string",
-                                "$ref": "#/components/schemas/Pedido"
-                            }
-                        }
-                    },
-                    "required":false
-                },
+
                 "responses": {
                     "200":{
                         "description": "Retorna o objeto atualizado no banco",
