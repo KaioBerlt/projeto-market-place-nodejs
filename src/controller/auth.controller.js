@@ -20,6 +20,7 @@ const loginController = async (req, res) => {
 
     res.status(200).send({
         email,
+        id: user.id,
         token 
     });
 };
