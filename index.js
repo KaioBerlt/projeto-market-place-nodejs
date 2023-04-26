@@ -14,11 +14,21 @@ const docs = require("./src/router/docs.router");//arquivo de rota documentacao
 const app = express();
 const port = 3000;
 app.use(express.json());
+
+// Adicionar os cabeçalhos Access-Control-Allow-Origin
+app.use((req, res, next) => {
+	//Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+	//Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    app.use(cors());
+    next();
+});
 app.use(cors(
     {
         origin: [
-            "localhost:3001",
-            "localhost:3002"
+            "http://localhost:3001/",
+            "http://localhost:3001/login"
         ],
         methods: ["GET", "POST", "PUT", "PATCH","DELETE"]
     }
